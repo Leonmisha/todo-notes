@@ -10,9 +10,13 @@
       <router-link :to="{ name: 'TodoList', params: { id: list.id }}">
         <button>Редактировать</button>
       </router-link>
-      <button>Удалить</button>
+      <BaseButton :action="showModal" text="Удалить"/>
     </div>
   </div>
+  <ModalWindow
+      v-show="isModalVisible"
+      :onClose="closeModal"
+    />
 </template>
 
 <script>
@@ -24,8 +28,24 @@ export default {
     item: Object
   },
   components: {
-    TodoItem
-  }
+    TodoItem,
+    BaseButton,
+    ModalWindow
+  },
+  methods: {
+    showModal () {
+      this.isModalVisible = true;
+    },
+    closeModal () {
+      this.isModalVisible = false;
+      if (confirmed) {
+        this.$store.dispatch('DELETE_LIST', list.id)
+      }
+    },
+    deleteList () {
+      this.$store.dispatch('DELETE_LIST', list.id)
+    }
+  },
 }
 </script>
 

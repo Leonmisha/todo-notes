@@ -1,4 +1,4 @@
-const itemName = 'todo'
+const itemName = 'todoList'
 
 export const saveState = (state) => {
   sessionStorage.setItem(itemName, JSON.stringify(state))

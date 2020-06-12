@@ -15,9 +15,10 @@ export default {
   components: {
     TodoList
   },
-  props: {
-    todoLists: Array,
-    item: Object
+  computed: {
+    todoLists () {
+      return this.$store.getters.TODO_LIST
+    }
   }
 }
 </script>
