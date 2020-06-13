@@ -2,32 +2,96 @@
   <div class="modal-background">
     <div class="modal">
       <div class="btn-close">
-          <BaseButton :action="close(false)" text="X"/>
+          <BaseButton :action="close(false)" text="X">
+            Х
+          </BaseButton>
       </div>
-
-      <div class="text">
-        {{ text }}
-      </div>
-      <div class="panel">
-        <BaseButton :action="close(true)" text='Да'/>
-        <BaseButton :action="close(false)" text='Нет'/>
+      <div class="modal-body">
+        <div class="modal-text">
+          {{ text }}
+        </div>
+        <div class="modal-panel">
+          <BaseButton :action="close(true)" class='modal-panel-button'>
+            Да
+          </BaseButton>
+          <BaseButton :action="close(false)" class='modal-panel-button'>
+            Нет
+          </BaseButton>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import TodoItem from '@/components/TodoItem.vue'
-  export default {
-    name: 'ModalWindow',
-    components: {
-      BaseButton
-    },
-    methods: {
-      close() {
-        this.$emit('close');
-        this.onClose()
-      },
-    },
-  };
+import BaseButton from '@/components/BaseButton.vue'
+export default {
+  name: 'ModalWindow',
+  components: {
+    BaseButton
+  },
+  methods: {
+    close (state) {
+      return () => {
+        this.onClose(state)
+      }
+    }
+  },
+  props: {
+    onClose: Function,
+    text: String
+  }
+}
 </script>
+
+<style scoped>
+.modal-background {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 500px;
+  min-height: 200px;
+  height: 200px;
+  padding: 10px;
+  background: #FFFFFF;
+  box-shadow: 2px 2px 20px 1px;
+}
+.modal-body {
+  padding: 10px;
+  height: calc( 100% - 20px)
+}
+.modal-panel {
+  margin-top: 20px;
+}
+.modal-panel button:first-child {
+  margin-right: 20px;
+}
+.modal-panel-button {
+  width: 100px;
+}
+.modal-text {
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+</style>

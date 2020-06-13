@@ -2,8 +2,8 @@
   <div class="TodoLists">
     <TodoList
         v-for="item in todoLists"
-        v-bind:list="item"
-        v-bind:key="item.id"
+        :list="item"
+        :key="item.id"
       ></TodoList>
   </div>
 </template>
@@ -19,7 +19,10 @@ export default {
     todoLists () {
       return this.$store.getters.TODO_LIST
     }
-  }
+  },
+  data: () => ({
+    isModalVisible: false
+  })
 }
 </script>
 
@@ -31,20 +34,6 @@ export default {
    margin: 0 auto;
    justify-content: center;
    align-items: center;
+   flex-wrap: wrap;
  }
-/*h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-} */
-
 </style>

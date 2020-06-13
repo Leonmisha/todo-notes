@@ -13,10 +13,16 @@ const routes = [
   {
     path: '/todo/:id',
     name: 'TodoList',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/TodoList.vue')
+    component: () => import(/* webpackChunkName: "TodoList" */ '../views/TodoList.vue')
+  },
+  {
+    path: '/404',
+    name: 'Page404',
+    component: () => import(/* webpackChunkName: "Page404" */ '../views/Page404.vue')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 
