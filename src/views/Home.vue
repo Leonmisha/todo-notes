@@ -2,7 +2,7 @@
   <div class="home">
     <h1>Заметки</h1>
     <TodoLists/>
-    <a title='Создать заметку' v-on:click="addList()" class='create-button' tabIndex='0'>+</a>
+    <a title='Создать заметку' @keyup.enter.space="addList()" @click="addList()" class='create-button' tabIndex='0'>+</a>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     addList: function () {
       this.$store.dispatch('ADD_LIST')
         .then((d) => {
-          this.$router.push({ name: 'TodoList', params: { id: d } })
+          this.$router.push({ name: 'TodoListChanging', params: { id: d }, query: { new: 'true' } })
         })
     }
   }
@@ -63,6 +63,11 @@ export default {
 }
 .create-button:hover {
   cursor: pointer;
+  color: green;
+}
+.create-button:focus {
+  background: green;
+  outline: none;
   color: green;
 }
 </style>

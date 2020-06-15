@@ -5,6 +5,7 @@
         v-show="isModalVisible"
         :onClose="closeModal"
         :text="text"
+        :isModalVisible="isModalVisible"
       />
   </div>
 </template>

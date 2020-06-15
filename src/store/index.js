@@ -66,7 +66,7 @@ const store = new Vuex.Store({
       state.prompt = { text, confirmed: null, isModalVisible: true, callBack }
     },
     CLOSE_MODAL (state, confirmed) {
-      state.prompt = { ...state.prompt, isModalVisible: false, confirmed }
+      state.prompt = { ...state.prompt, text: '', isModalVisible: false, confirmed }
       const callBack = state.prompt.callBack
       if (callBack != null) { callBack(confirmed) }
     },

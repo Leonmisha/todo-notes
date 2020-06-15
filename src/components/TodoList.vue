@@ -3,22 +3,30 @@
     <div class="list-title">{{list.title}}</div>
     <ul>
       <TodoItem
-          v-for="item in list.tasksList.slice(0,3)"
+          v-for="item in tasksListSorted"
           :item="item"
           :key="item.id"
           :editable="false"
         ></TodoItem>
     </ul>
+    <div>
+      <router-link title='Посмотреть все' v-if="isMoreTasks" :to="{ name: 'TodoListChanging', params: { id: list.id }}" class='link inline-block'>
+        <div class="more-Tasks inline-block">...</div>
+      </router-link>
+      <div v-else></div>
+    </div>
+
     <div class="control-panel">
-      <router-link :to="{ name: 'TodoList', params: { id: list.id }}" class='link'>
-        <BaseButton tabIndex='-1' class="edit-button">
+      <router-link :tabIndex="-1" title='Редактировать' :to="{ name: 'TodoListChanging', params: { id: list.id }}" class='link'>
+        <BaseButton  class="edit-button">
           <img src="../assets/editIcon.png" style="height: 25px;" class='icon-button'>
         </BaseButton>
       </router-link>
-      <BaseButton :action="deleteList" class="delete-button">
-        <img src="../assets/deleteIcon.png" style="height: 25px;" class='icon-button'>
-      </BaseButton>
-
+      <a title='Удалить' class='link'>
+        <BaseButton :action="deleteList" class="delete-button">
+          <img src="../assets/deleteIcon.png" style="height: 25px;" class='icon-button'>
+        </BaseButton>
+      </a>
     </div>
   </div>
 </template>
@@ -36,6 +44,25 @@ export default {
   components: {
     TodoItem,
     BaseButton
+  },
+  computed: {
+    tasksListSorted () {
+      let tasksListCopy = [...this.list.tasksList]
+      tasksListCopy = tasksListCopy.map(task => { return { ...task } })
+      tasksListCopy.sort((a, b) => {
+        if (a.done === b.done) {
+          return 0
+        } else if (a.done === false) {
+          return -1
+        } else {
+          return 1
+        }
+      })
+      return tasksListCopy.slice(0, 3)
+    },
+    isMoreTasks () {
+      return this.list.tasksList.length > 3
+    }
   },
   methods: {
     deleteList () {
@@ -81,21 +108,32 @@ export default {
   background: #ffeeb6;
   margin: 20px;
   display: grid;
-  grid-template-rows: 50px 1fr 40px;
+  grid-template-rows: 40px 1fr 40px 40px;
 }
 .list-title {
-  font-size: 20px;
-  margin-bottom: 30px;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 ul {
   padding: 0;
+  margin: 0;
 }
 .delete-button:hover {
-  background: rgb(255, 0, 0);
-  border-color: rgb(255, 0, 0);
+  background: rgba(255, 0, 0, 0.57);
+  border-color: rgba(255, 0, 0, 0.57);
 }
-.edit-button:hover {
-  background: rgb(247, 194, 15);
-  border-color: rgb(247, 194, 15);
+.more-Tasks {
+  font-size: 3rem;
+  transform: rotate(180deg);
+  user-select: none;
+}
+.more-Tasks:hover {
+  color: green;
+}
+.inline-block {
+  display: inline-block;
 }
 </style>

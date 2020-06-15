@@ -1,9 +1,8 @@
 <template>
   <button
-    v-on:click="action()"
-    :disabled="disabled"
+    @click="action"
     class='base-button'
-    :tabIndex="tabIndex">
+    :type="type">
     <slot></slot>
   </button>
 </template>
@@ -12,21 +11,48 @@
 export default {
   name: 'BaseButton',
   props: {
-    action: Function,
-    disabled: {
-      type: Boolean,
-      default: false
+    action: {
+      type: Function,
+      default: () => {}
     },
-    tabIndex: {
-      type: Number,
-      default: 0
+    type: {
+      type: String,
+      default: 'button'
     }
   }
 }
 </script>
 
  <style scoped>
- .base-button {
-   cursor: pointer;
- }
+  .base-button {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #eac452;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+  }
+  .base-button:hover,
+  .base-button:focus {
+    background: rgb(255, 191, 0);
+    border-color: rgb(255, 191, 0);
+  }
+  .base-button:focus {
+    box-shadow: 0 5px black;
+  }
+  .base-button:active:not([disabled]) {
+    background-color: #eac452;
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+  }
+  .base-button[disabled] {
+    background-color: white;
+    cursor: not-allowed;
+  }
 </style>
