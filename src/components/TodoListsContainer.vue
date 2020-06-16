@@ -1,23 +1,24 @@
 <template>
-  <div class="TodoLists">
+  <div class='todo-lists-container'>
     <TodoList
-        v-for="item in todoLists"
-        :list="item"
-        :key="item.id"
+        v-for="list in todoLists"
+        :list="list"
+        :key="list.id"
       ></TodoList>
   </div>
 </template>
 
 <script>
 import TodoList from '@/components/TodoList.vue'
+
 export default {
-  name: 'TodoLists',
+  name: 'TodoListsContainer',
   components: {
     TodoList
   },
   computed: {
     todoLists () {
-      return this.$store.getters.TODO_LIST
+      return this.$store.getters.TODO_LISTS
     }
   },
   data: () => ({
@@ -26,14 +27,14 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
- <style scoped>
- .TodoLists {
+<style scoped>
+  .todo-lists-container {
    display: flex;
    width: 1120px;
    margin: 0 auto;
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
- }
+   padding-left: calc(100vw - 100%);
+  }
 </style>

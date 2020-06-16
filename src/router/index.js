@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -13,12 +13,12 @@ const routes = [
   {
     path: '/todo/:id',
     name: 'TodoListChanging',
-    component: () => import(/* webpackChunkName: "TodoListChanging" */ '../views/TodoListChanging.vue')
+    component: () => import(/* webpackChunkName: "TodoListChanging" */ '@/views/TodoListChanging.vue')
   },
   {
     path: '/404',
     name: 'Page404',
-    component: () => import(/* webpackChunkName: "Page404" */ '../views/Page404.vue')
+    component: () => import(/* webpackChunkName: "Page404" */ '@/views/Page404.vue')
   },
   {
     path: '*',

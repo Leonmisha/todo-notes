@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <router-view/>
-    <ModalWindow
-        v-show="isModalVisible"
-        :onClose="closeModal"
-        :text="text"
-        :isModalVisible="isModalVisible"
-      />
+    <transition name="fade">
+      <ModalWindow
+          v-show="isModalVisible"
+          :onClose="closeModal"
+          :text="text"
+          :isModalVisible="isModalVisible"
+        />
+    </transition>
   </div>
 </template>
 
@@ -62,19 +64,6 @@ img {
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 .stopScrolling {
   height: 100%;
   overflow: hidden;
@@ -82,5 +71,17 @@ img {
 .base-button img {
   display: flex;
   margin: 0 auto;
+}
+.icon-button {
+  height: 30px;
+}
+button:disabled .icon-button {
+  filter: invert(0.5);
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -1,26 +1,25 @@
 <template>
-  <div class="modal-background">
-    <div class="modal">
-      <div class="btn-close">
-          <button @click="onClose(false)">
+  <div class='modal-background'>
+    <div class='modal'>
+      <div class='modal-button-close-container'>
+          <button class='modal-button-close' @click="onClose(false)">
             Х
           </button>
       </div>
-      <div class="modal-body">
-        <div class="modal-text">
+      <div class='modal-body'>
+        <div class='modal-text'>
           {{ text }}
         </div>
-        <div class="modal-panel">
+        <div class='modal-control-panel'>
           <BaseButton
-            :action="close(true)"
+            @click="onClose(true)"
             ref="yesButton"
-            class='modal-panel-button'
-            v-on:keyup.right="focusRefNo">
+            class='modal-panel-button modal-button-yes'>
             Да
           </BaseButton>
           <BaseButton
-            :action="close(false)"
-            class='modal-panel-button'
+            @click="onClose(false)"
+            class='modal-panel-button modal-button-no'
             v-focus="isModalVisible"
             ref="noButton">
             Нет
@@ -33,6 +32,7 @@
 
 <script>
 import BaseButton from '@/components/BaseButton.vue'
+
 export default {
   name: 'ModalWindow',
   components: {
@@ -55,9 +55,18 @@ export default {
     }
   },
   props: {
-    onClose: Function,
-    text: String,
-    isModalVisible: Boolean
+    onClose: {
+      type: Function,
+      required: true
+    },
+    text: {
+      type: String,
+      default: 'Вы уверены?'
+    },
+    isModalVisible: {
+      type: Boolean,
+      required: true
+    }
   },
   directives: {
     focus: {
@@ -87,18 +96,14 @@ export default {
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.2);
-    transition: opacity 0.3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .modal {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     min-width: 500px;
-    min-height: 200px;
+    max-width: 650px;
     height: 200px;
     padding: 10px;
     background: #FFFFFF;
@@ -108,10 +113,10 @@ export default {
     padding: 10px;
     height: calc( 100% - 20px)
   }
-  .modal-panel {
+  .modal-control-panel {
     margin-top: 20px;
   }
-  .modal-panel button:first-child {
+  .modal-control-panel button:first-child {
     margin-right: 20px;
   }
   .modal-panel-button {
@@ -122,13 +127,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
   }
-  .btn-close {
+  .modal-button-close-container {
     position: absolute;
     top: 5px;
     right: 5px;
   }
-  .btn-close button {
+  .modal-button-close {
     border: none;
     background: none;
     font-size: 1.3rem;

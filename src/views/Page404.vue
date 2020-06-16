@@ -1,5 +1,5 @@
 <template>
-  <div class="Page404">
+  <div class='page404'>
     <h1>Ошибка 404. Страница не найдена</h1>
   </div>
 </template>

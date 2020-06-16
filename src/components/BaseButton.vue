@@ -1,8 +1,8 @@
 <template>
   <button
-    @click="action"
     class='base-button'
-    :type="type">
+    :type="type"
+    @click="$emit('click', $event)">
     <slot></slot>
   </button>
 </template>
@@ -11,10 +11,6 @@
 export default {
   name: 'BaseButton',
   props: {
-    action: {
-      type: Function,
-      default: () => {}
-    },
     type: {
       type: String,
       default: 'button'

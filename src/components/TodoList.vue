@@ -1,7 +1,7 @@
 <template>
-  <div class="TodoList">
-    <div class="list-title">{{list.title}}</div>
-    <ul>
+  <div class='todo-list'>
+    <div class='todo-list-title'>{{list.title}}</div>
+    <ul class='todos-container'>
       <TodoItem
           v-for="item in tasksListSorted"
           :item="item"
@@ -11,20 +11,20 @@
     </ul>
     <div>
       <router-link title='Посмотреть все' v-if="isMoreTasks" :to="{ name: 'TodoListChanging', params: { id: list.id }}" class='link inline-block'>
-        <div class="more-Tasks inline-block">...</div>
+        <div class='more-tasks inline-block'>...</div>
       </router-link>
       <div v-else></div>
     </div>
 
-    <div class="control-panel">
+    <div class='control-panel'>
       <router-link :tabIndex="-1" title='Редактировать' :to="{ name: 'TodoListChanging', params: { id: list.id }}" class='link'>
-        <BaseButton  class="edit-button">
-          <img src="../assets/editIcon.png" style="height: 25px;" class='icon-button'>
+        <BaseButton  class='edit-button'>
+          <img src="@/assets/editIcon.png" class='icon-button'>
         </BaseButton>
       </router-link>
       <a title='Удалить' class='link'>
-        <BaseButton :action="deleteList" class="delete-button">
-          <img src="../assets/deleteIcon.png" style="height: 25px;" class='icon-button'>
+        <BaseButton @click="deleteList" class='delete-button'>
+          <img src="@/assets/deleteIcon.png" class='icon-button'>
         </BaseButton>
       </a>
     </div>
@@ -38,8 +38,10 @@ import BaseButton from '@/components/BaseButton.vue'
 export default {
   name: 'TodoList',
   props: {
-    list: Object,
-    item: Object
+    list: {
+      type: Object,
+      required: true
+    }
   },
   components: {
     TodoItem,
@@ -87,53 +89,48 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.control-panel {
-  display: flex;
-  justify-content: space-between;
-}
-.control-panel button {
-  width: 40px;
-}
-.link {
-  display: flex;
-  text-decoration: none;
-}
-.TodoList {
-  width: 290px;
-  height: 290px;
-  padding: 20px;
-  background: #ffeeb6;
-  margin: 20px;
-  display: grid;
-  grid-template-rows: 40px 1fr 40px 40px;
-}
-.list-title {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-ul {
-  padding: 0;
-  margin: 0;
-}
-.delete-button:hover {
-  background: rgba(255, 0, 0, 0.57);
-  border-color: rgba(255, 0, 0, 0.57);
-}
-.more-Tasks {
-  font-size: 3rem;
-  transform: rotate(180deg);
-  user-select: none;
-}
-.more-Tasks:hover {
-  color: green;
-}
-.inline-block {
-  display: inline-block;
-}
+  .control-panel {
+    display: flex;
+    justify-content: space-between;
+  }
+  .link {
+    display: flex;
+    text-decoration: none;
+  }
+  .todo-list {
+    width: 290px;
+    height: 290px;
+    padding: 20px;
+    background: #ffeeb6;
+    margin: 20px;
+    display: grid;
+    grid-template-rows: 40px 1fr 40px 40px;
+  }
+  .todo-list-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+  .todos-container {
+    padding: 0;
+    margin: 0;
+  }
+  .delete-button:hover {
+    background: rgba(255, 0, 0, 0.57);
+    border-color: rgba(255, 0, 0, 0.57);
+  }
+  .more-tasks {
+    font-size: 3rem;
+    transform: rotate(180deg);
+    user-select: none;
+  }
+  .more-tasks:hover {
+    color: green;
+  }
+  .inline-block {
+    display: inline-block;
+  }
 </style>
