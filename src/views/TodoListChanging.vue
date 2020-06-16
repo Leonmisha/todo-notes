@@ -125,6 +125,10 @@ export default {
     },
     saveChanges (e) {
       e.preventDefault()
+      this.todoListLocal.title = this.todoListLocal.title && this.todoListLocal.title.trim()
+      if (!this.todoListLocal.title) {
+        this.todoListLocal.title = this.todoList.title
+      }
       this.updateList()
       this.goHome()
     },
