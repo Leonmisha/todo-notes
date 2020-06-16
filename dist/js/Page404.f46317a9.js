@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["Page404"],{9601:function(e,t,n){"use strict";n.r(t);var a=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},s=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"page404"},[n("h1",[e._v("Ошибка 404. Страница не найдена")])])}],c={name:"Page404"},r=c,i=n("2877"),l=Object(i["a"])(r,a,s,!1,null,"7afe3dd4",null);t["default"]=l.exports}}]);
+//# sourceMappingURL=Page404.f46317a9.js.map
